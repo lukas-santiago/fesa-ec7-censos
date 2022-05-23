@@ -1,0 +1,34 @@
+<table class="table table-striped" width="100%">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Código</th>
+      <th>Descrição</th>
+      <th>Expira em</th>
+      <th>Criado por</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr routerLink="/createForm" routerLinkActive="active">
+      <td>Censo demográfico 2022</td>
+      <td>IBGE-CD2022</td>
+      <td>Censo demográfico 2022</td>
+      <td>10/06/2022 12:00:00</td>
+      <td>Mim</td>
+    </tr>
+  </tbody>
+</table>
+
+<button class="btn btn-primary">Novo</button>
+<div>
+  <label for="field-type">Field Type</label><br>
+  <select name="field-type" id="">
+    <!-- <option value="">Selecione</option> -->
+    <option value="">Texto</option>
+    <option value="">Texto Longo</option>
+  </select>
+  <label for="field-value">Field Value</label>
+  <input type="text" name="field-value" id="">
+</div>
+
+<button class="btn btn-primary">Salvar</button>
