@@ -3,6 +3,29 @@
 
   <button class="btn btn-primary">Novo</button>
 </div>
+<table mat-table [dataSource]="forms" class="table table-striped" width="100%">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>No.</th>
+    <td mat-cell *matCellDef="let element">{{element.id}}</td>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>name</th>
+    <td mat-cell *matCellDef="let element">{{element.name}}</td>
+  </ng-container>
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef>description</th>
+    <td mat-cell *matCellDef="let element">{{element.description}}</td>
+  </ng-container>
+  <ng-container matColumnDef="expiredAt">
+    <th mat-header-cell *matHeaderCellDef>expiredAt</th>
+    <td mat-cell *matCellDef="let element">{{element.expiredAt}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<br>
+
 <table class="table table-striped" width="100%">
   <thead>
     <tr>

@@ -1,0 +1,22 @@
+<h1>Entrar</h1>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="container">
+    <mat-form-field>
+      <input matInput placeholder="Nome de usuário ou email" formControlName="usernameOrEmail" />
+      <mat-hint *ngIf="loginForm.controls['usernameOrEmail'].errors">Campo obrigatório</mat-hint>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="password" matInput="" placeholder="Senha" formControlName="password" />
+      <mat-hint *ngIf="loginForm.controls['password'].errors">Campo obrigatório</mat-hint>
+    </mat-form-field>
+
+    <button mat-flat-button class="primary" type="submit" [disabled]="!loginForm.valid">
+      Entrar
+    </button>
+  </div>
+</form>
+<br>
+<h3 style="text-align: center">
+  Não tem uma conta?
+  <button mat-button routerLink="/register" routerLinkActive="active">Crie uma conta</button>
+</h3>

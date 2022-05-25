@@ -1,31 +1,36 @@
 <mat-toolbar color="primary">
-    <button mat-icon-button class="example-icon" (click)="drawer.toggle()">
-        <mat-icon>menu</mat-icon>
-    </button>
-    <span>Censos</span>
-    <span class="example-spacer"></span>
-    <button mat-icon-button>
-        <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button>
-        <mat-icon>share</mat-icon>
-    </button>
+  <button mat-icon-button class="example-icon" (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Censos</span>
+  <span class="example-spacer"></span>
+  <button mat-button *ngIf="!authenticated" routerLink="/login" routerLinkActive="active">
+    <mat-icon>login</mat-icon>
+    Entrar
+  </button>
+  <span *ngIf="authenticated">
+    Olá, {{user.name}}
+  </span>
+  <button mat-button *ngIf="authenticated" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+    Sair
+  </button>
 </mat-toolbar>
 
 <mat-drawer-container class="example-container" autosize>
-    <mat-drawer #drawer class="example-sidenav" mode="side" opened>
-        <mat-selection-list [multiple]="false">
-            <mat-list-option routerLink="/" routerLinkActive="active" selected>
-                <p>Início</p>
-            </mat-list-option>
-            <mat-list-option routerLink="/forms" routerLinkActive="active">
-                <p>Formulário</p>
-            </mat-list-option>
-        </mat-selection-list>
-    </mat-drawer>
+  <mat-drawer #drawer class="example-sidenav" mode="side" opened>
+    <mat-selection-list [multiple]="false">
+      <mat-list-option routerLink="/" routerLinkActive="active" selected>
+        <p>Início</p>
+      </mat-list-option>
 
-    <div class="content-container">
-        <router-outlet></router-outlet>
-    </div>
+      <mat-list-option routerLink="/forms" routerLinkActive="active">
+        <p>Formulário</p>
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-drawer>
 
+  <div class="content-container">
+    <router-outlet></router-outlet>
+  </div>
 </mat-drawer-container>
