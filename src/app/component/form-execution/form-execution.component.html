@@ -5,7 +5,6 @@
       <th>Nome</th>
       <th>Descrição</th>
       <th>Expira em</th>
-      <th>Ações</th>
     </tr>
   </thead>
   <tbody>
@@ -14,34 +13,24 @@
       <td>{{form.name}}</td>
       <td>{{form.description}}</td>
       <td>{{form.expiredAt}}</td>
-      <td class="d-flex">
-        <button mat-button class="btn btn-sm btn-warning" (click)="openFormDialog('edit', form)">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </td>
     </tr>
   </tbody>
 </table>
 
-<div class="d-flex justify-content-end">
-  <button mat-button class="btn btn-success" (click)="addField()">
-    <mat-icon>add</mat-icon>
-    Adicionar Campo
-  </button>
-</div>
 <div class="fields" *ngFor="let formField of formFields; let index = index">
   <div *ngIf="formField.fieldId != 2">
     <span class="mx-3">#{{index + 1}}</span>
     <mat-form-field>
       <mat-label for="field-type">{{formField.fieldDescription}}</mat-label>
-      <input matInput type="text" name="field-value" id="" [(ngModel)]="formField.description">
+      <input matInput type="text" name="field-value" (ngModel)="formField.data" [value]="formExecution[index]?.answer">
     </mat-form-field>
   </div>
   <div *ngIf="formField.fieldId == 2">
     <span class="mx-3">#{{index + 1}}</span>
     <mat-form-field>
       <mat-label for="field-type">{{formField.fieldDescription}}</mat-label>
-      <textarea matInput type="text" name="field-value" id="" [(ngModel)]="formField.description"></textarea>
+      <textarea matInput name="field-value" (ngModel)="formField.data"
+        [value]="formExecution[index]?.answer"></textarea>
     </mat-form-field>
   </div>
 </div>

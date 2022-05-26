@@ -11,13 +11,21 @@ import { User } from '../models/user.model';
 })
 export class AuthenticationService {
   static user: User;
-  static authenticatedObservable: Observable<boolean>
-  static _authenticated = new BehaviorSubject<boolean>(false);
+  static authenticated = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {
-    AuthenticationService.user = new User();
-    AuthenticationService._authenticated.next(this.isAuthenticated());
-    AuthenticationService.authenticatedObservable = AuthenticationService._authenticated.asObservable()
+
+    let userJson: any = JSON.parse(localStorage.getItem('user') || '{}')
+
+    if (userJson.authdata?.length > 0) {
+      AuthenticationService.user = userJson;
+      AuthenticationService.authenticated.next(true);
+    }
+    else {
+      AuthenticationService.user = new User();
+      AuthenticationService.authenticated.next(false);
+    }
+
   }
   public signup(signup: ISignUp): Observable<any> {
     console.log("signup");
@@ -43,12 +51,16 @@ export class AuthenticationService {
     return this.http.post<any>(AppSettings.API_ROUTES.SignIn, JSON.stringify(signin), httpOptions)
       // .pipe(catchError(this.handleError))
       .pipe(map(data => {
-        AuthenticationService.user.name = data.name
-        AuthenticationService.user.username = data.username
-        AuthenticationService.user.email = data.email
-        AuthenticationService.user.authdata = window.btoa(signin.usernameOrEmail + ':' + signin.password)
+        let user: User = new User();
+        user.name = data.name
+        user.username = data.username
+        user.email = data.email
+        user.authdata = 'Basic ' + window.btoa(signin.usernameOrEmail + ':' + signin.password)
 
-        AuthenticationService._authenticated.next(true)
+        AuthenticationService.user = user
+
+        localStorage.setItem('user', JSON.stringify(user))
+        AuthenticationService.authenticated.next(true)
 
         return data
       }))
@@ -56,7 +68,9 @@ export class AuthenticationService {
   public signout(): Observable<any> {
     return this.http.get<any>(AppSettings.API_ROUTES.SignOut).pipe(
       map(() => {
-        AuthenticationService._authenticated.next(false)
+        console.log('signout');
+        AuthenticationService.authenticated.next(false)
+        localStorage.removeItem('user')
       })
     )
   }
@@ -70,6 +84,13 @@ export class AuthenticationService {
   }
   public isAuthenticated(): boolean {
     // return document.cookie.indexOf('JSESSIONID=') != -1;
-    return AuthenticationService._authenticated.getValue();
+    let auth = AuthenticationService.authenticated.getValue()
+    let userJson: User = JSON.parse(localStorage.getItem('user') || '{}')
+    if (auth && userJson.authdata?.length > 0) {
+      AuthenticationService.authenticated.next(true)
+      return true;
+    }
+    AuthenticationService.authenticated.next(false)
+    return false;
   }
 }

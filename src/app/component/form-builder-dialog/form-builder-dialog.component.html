@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>{{title}}</h1>
+<form [formGroup]="fieldGroup" (ngSubmit)="onSubmit()">
+  <div class="d-flex flex-column">
+    <mat-form-field>
+      <mat-label>Campos</mat-label>
+      <mat-select [(value)]="fieldSelected" formControlName="field">
+        <mat-option></mat-option>
+        <mat-option [value]="field" *ngFor="let field of fields">{{ field.type }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="d-flex justify-content-center" mat-dialog-actions>
+    <button mat-flat-button (click)="cancelDialog()">Cancelar</button>
+    <button mat-flat-button class="primary" type="submit" [disabled]="!fieldGroup.valid">Confirmar</button>
+  </div>
+</form>

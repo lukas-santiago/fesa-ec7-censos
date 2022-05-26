@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>{{title}}</h1>
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <div class="d-flex flex-column" *ngIf="showForm">
+    <mat-form-field>
+      <input matInput placeholder="Nome" formControlName="name" type="text" />
+      <mat-hint *ngIf="formGroup.controls['name'].errors"></mat-hint>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Descrição" formControlName="description" type="text" />
+      <mat-hint *ngIf="formGroup.controls['description'].errors"></mat-hint>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Expira em" formControlName="expiredAt" type="datetime-local" />
+      <mat-hint *ngIf="formGroup.controls['expiredAt'].errors">Campo obrigatório</mat-hint>
+    </mat-form-field>
+  </div>
+  <div style="text-align: center">
+    <h3>Você tem certeza disso?</h3>
+  </div>
+  <div class="d-flex justify-content-center" mat-dialog-actions>
+    <button mat-flat-button (click)="cancelDialog()">Cancelar</button>
+    <button mat-flat-button class="primary" type="submit" [disabled]="!formGroup.valid">Confirmar</button>
+  </div>
+</form>

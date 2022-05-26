@@ -17,6 +17,12 @@ import { FormBuilderComponent } from './component/form-builder/form-builder.comp
 import { FormComponent } from './component/form/form.component';
 import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/register/register.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormDialogComponent } from './component/form-dialog/form-dialog.component';
+import { HomeComponent } from './component/home/home.component';
+import { FormBuilderDialogComponent } from './component/form-builder-dialog/form-builder-dialog.component'
+import { MatSelectModule } from '@angular/material/select';
+import { FormExecutionComponent } from './component/form-execution/form-execution.component';
 
 
 
@@ -27,7 +33,11 @@ import { RegisterComponent } from './component/register/register.component';
     FormComponent,
     FormBuilderComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    FormDialogComponent,
+    HomeComponent,
+    FormBuilderDialogComponent,
+    FormExecutionComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +55,8 @@ import { RegisterComponent } from './component/register/register.component';
     MatTableModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDialogModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

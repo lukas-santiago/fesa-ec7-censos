@@ -5,6 +5,9 @@ export class AppSettings {
     SignUp: this.API_ENDPOINT + 'auth/signup/',
     SignIn: this.API_ENDPOINT + 'auth/signin/',
     SignOut: this.API_ENDPOINT + 'auth/logout/',
-    Form: this.API_ENDPOINT + 'form/'
+    Form: this.API_ENDPOINT + 'form/',
+    Field: this.API_ENDPOINT + 'field/',
+    FormField: this.API_ENDPOINT + 'formField/',
+    FormExecution: this.API_ENDPOINT + 'formExecution/',
   }
 }

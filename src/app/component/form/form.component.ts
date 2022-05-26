@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTable } from '@angular/material/table';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Form } from '../../models/form.model';
 import { FormService } from '../../service/form.service';
+import { FormDialogComponent } from '../form-dialog/form-dialog.component';
 
 @Component({
   selector: 'app-form',
@@ -10,17 +11,33 @@ import { FormService } from '../../service/form.service';
 })
 export class FormComponent implements OnInit {
   forms: Form[] = []
-  displayedColumns: string[] = ['id', 'name', 'description', 'expiredAt'];
 
-  // @ViewChild(MatTable) table: MatTable<any>;
-
-  constructor(private formService: FormService) { }
+  constructor(private formService: FormService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.loadForms()
+  }
+
+  openFormDialog(mode: string, form: Form = new Form()): void {
+    const dialogRef = this.dialog.open(FormDialogComponent, {
+      data: {
+        mode: mode,
+        form
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result?.refresh)
+        this.loadForms()
+    });
+
+  }
+  loadForms() {
     this.formService.getForms().subscribe(data => {
       this.forms = data
     })
-    // this.table.renderRows();
   }
+
+
 
 }
