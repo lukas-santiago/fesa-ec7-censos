@@ -1,3 +1,4 @@
+<h1>Responder formulário</h1>
 <table class="table table-striped" width="100%">
   <thead>
     <tr>
@@ -21,15 +22,16 @@
   <div *ngIf="formField.fieldId != 2">
     <span class="mx-3">#{{index + 1}}</span>
     <mat-form-field>
-      <mat-label for="field-type">{{formField.fieldDescription}}</mat-label>
-      <input matInput type="text" name="field-value" (ngModel)="formField.data" [value]="formExecution[index]?.answer">
+      <mat-label for="field-type">{{formField.description}}</mat-label>
+      <input matInput type="text" name="field-value" (ngModel)="formField.data"
+        (ngModelChange)="changeValue($event, index)" [value]=" formExecution[index]?.answer">
     </mat-form-field>
   </div>
   <div *ngIf="formField.fieldId == 2">
     <span class="mx-3">#{{index + 1}}</span>
     <mat-form-field>
       <mat-label for="field-type">{{formField.fieldDescription}}</mat-label>
-      <textarea matInput name="field-value" (ngModel)="formField.data"
+      <textarea matInput name="field-value" (ngModel)="formField.data" (ngModelChange)="changeValue($event, index)"
         [value]="formExecution[index]?.answer"></textarea>
     </mat-form-field>
   </div>

@@ -86,4 +86,10 @@ export class FormExecutionComponent implements OnInit {
       // window.location.reload()
     })
   }
+
+  changeValue(data: Event, index: number) {
+    console.log(data, index);
+    this.formFields[index].data = data
+
+  }
 }

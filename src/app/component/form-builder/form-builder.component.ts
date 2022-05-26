@@ -94,4 +94,8 @@ export class FormBuilderComponent implements OnInit {
       console.log(data);
     })
   }
+
+  deleteFormField(formFieldIndex: any) {
+    this.formFields.splice(formFieldIndex, 1)
+  }
 }
