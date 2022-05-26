@@ -83,7 +83,7 @@ export class FormExecutionComponent implements OnInit {
 
     this.formService.saveFormExecution(this.formExecution, this.form).subscribe(data => {
       // this.getFormFields()
-      // window.location.reload()
+      window.location.reload()
     })
   }
 

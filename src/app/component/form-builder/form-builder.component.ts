@@ -92,6 +92,7 @@ export class FormBuilderComponent implements OnInit {
 
     this.formService.saveFormFields(formFields, this.form).subscribe(data => {
       console.log(data);
+      window.location.reload()
     })
   }
 

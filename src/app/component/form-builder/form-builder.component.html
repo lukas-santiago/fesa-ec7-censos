@@ -30,23 +30,33 @@
     Adicionar Campo
   </button>
 </div>
-<div class="fields" *ngFor="let formField of formFields; let index = index">
-  <div *ngIf="formField.fieldId != 2">
-    <span class="mx-3">#{{index + 1}}</span>
-    <mat-form-field>
-      <mat-label for="field-type">{{formField.fieldDescription}}</mat-label>
-      <input matInput type="text" name="field-value" id="" [(ngModel)]="formField.description">
-    </mat-form-field>
-    <button mat-flat-button class="btn btn-primary btn-sm mx-4" (click)="deleteFormField(index)">Excluir Campo</button>
-  </div>
-  <div *ngIf="formField.fieldId == 2">
+<div class="fields">
+  <div class="field" *ngFor="let formField of formFields; let index = index">
+    <div *ngIf="true || formField.fieldId != 2">
+      <span class="mx-3">#{{index + 1}}</span>
+      <mat-form-field>
+        <mat-label for="field-type">{{formField.fieldDescription}}</mat-label>
+        <input matInput type="text" name="field-value" id="" [(ngModel)]="formField.description">
+      </mat-form-field>
+      <button mat-button class="btn btn-danger btn-sm mx-4" (click)="deleteFormField(index)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <!-- <div *ngIf="formField.fieldId == 2">
     <span class="mx-3">#{{index + 1}}</span>
     <mat-form-field>
       <mat-label for="field-type">{{formField.fieldDescription}}</mat-label>
       <textarea matInput type="text" name="field-value" id="" [(ngModel)]="formField.description"></textarea>
     </mat-form-field>
     <button mat-flat-button class="btn btn-primary btn-sm mx-4" (click)="deleteFormField(index)">Excluir Campo</button>
+  </div> -->
   </div>
 </div>
 
-<button class="btn btn-primary" (click)="saveFields()">Salvar</button>
+<!-- <button class="btn btn-primary" (click)="saveFields()">Salvar</button> -->
+<div class="d-flex justify-content-center">
+  <button mat-button class="btn btn-success" (click)="saveFields()">
+    <mat-icon>save</mat-icon>
+    Salvar Campos
+  </button>
+</div>

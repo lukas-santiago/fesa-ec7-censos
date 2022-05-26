@@ -17,24 +17,31 @@
     </tr>
   </tbody>
 </table>
-
-<div class="fields" *ngFor="let formField of formFields; let index = index">
-  <div *ngIf="formField.fieldId != 2">
-    <span class="mx-3">#{{index + 1}}</span>
-    <mat-form-field>
-      <mat-label for="field-type">{{formField.description}}</mat-label>
-      <input matInput type="text" name="field-value" (ngModel)="formField.data"
-        (ngModelChange)="changeValue($event, index)" [value]=" formExecution[index]?.answer">
-    </mat-form-field>
-  </div>
-  <div *ngIf="formField.fieldId == 2">
-    <span class="mx-3">#{{index + 1}}</span>
-    <mat-form-field>
-      <mat-label for="field-type">{{formField.fieldDescription}}</mat-label>
-      <textarea matInput name="field-value" (ngModel)="formField.data" (ngModelChange)="changeValue($event, index)"
-        [value]="formExecution[index]?.answer"></textarea>
-    </mat-form-field>
+<div class="fields">
+  <div class="field" *ngFor="let formField of formFields; let index = index">
+    <div *ngIf="formField.fieldId != 2">
+      <span class="mx-3">#{{index + 1}}</span>
+      <mat-form-field>
+        <mat-label for="field-type">{{formField.description}}</mat-label>
+        <input matInput type="text" name="field-value" (ngModel)="formField.data"
+          (ngModelChange)="changeValue($event, index)" [value]=" formExecution[index]?.answer">
+      </mat-form-field>
+    </div>
+    <div *ngIf="formField.fieldId == 2">
+      <span class="mx-3">#{{index + 1}}</span>
+      <mat-form-field>
+        <mat-label for="field-type">{{formField.description}}</mat-label>
+        <textarea matInput name="field-value" (ngModel)="formField.data" (ngModelChange)="changeValue($event, index)"
+          [value]="formExecution[index]?.answer"></textarea>
+      </mat-form-field>
+    </div>
   </div>
 </div>
 
-<button class="btn btn-primary" (click)="saveFields()">Salvar</button>
+<!-- <button class="btn btn-primary" (click)="saveFields()">Salvar</button> -->
+<div class="d-flex justify-content-center">
+  <button mat-button class="btn btn-success" (click)="saveFields()">
+    <mat-icon>save</mat-icon>
+    Salvar Respostas
+  </button>
+</div>
